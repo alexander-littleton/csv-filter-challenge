@@ -1,29 +1,18 @@
-# csv-filter-challenge-public
-# Instructions
-1. Click "Use this template" to create a copy of this repository in your personal github account.  
-1. Using technology of your choice, complete assignment listed below.
-1. Update the README in your new repo with:
-    * a `How-To` section containing any instructions needed to execute your program.
-    * an `Assumptions` section containing documentation on any assumptions made while interpreting the requirements.
-1. Send an email to Scoir (andrew@scoir.com) with a link to your newly created repo containing the completed exercise.
+## How-To
+Requires `node-js` and `yarn` installed.
 
-## Expectations
-1. This exercise is meant to drive a conversation. 
-1. Please invest only enough time needed to demonstrate your approach to problem solving, code design, etc.
-1. Within reason, treat your solution as if it would become a production system.
+To run, clone this repo and run `yarn install` then `yarn start` to spin up the application and answer the prompts. Once answered, the app will print an array of matching rows to stdout.
 
-## Assignment
-Create a command line application that parses a CSV file and filters the data per user input.
+By default, the filesystem starts at the root of the project folder for the file prompt.
 
-The CSV will contain three fields: `first_name`, `last_name`, and `dob`. The `dob` field will be a date in YYYYMMDD format.
+## Assumptions
+1. We only need to support filtering a single CSV file
+2. No other file types will need to be supported
+3. The script only needs to handle the 3 given fields
+4. Only exact match filtering for values
 
-The user should be prompted to filter by `first_name`, `last_name`, or birth year. The application should then accept a name or year and return all records that match the value for the provided filter. 
-
-Example input:
-```
-first_name,last_name,dob
-Bobby,Tables,19700101
-Ken,Thompson,19430204
-Rob,Pike,19560101
-Robert,Griesemer,19640609
-```
+## Nice To Haves
+1. Input data validation
+2. The ability to input a CSV by URL
+3. Testing
+4. Have the script live in a callable global package such that a user could call `parse-csv Documents/example.csv` directly into the command line
