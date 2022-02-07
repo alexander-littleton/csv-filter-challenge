@@ -11,8 +11,10 @@ By default, the filesystem starts at the root of the project folder for the file
 3. The script only needs to handle the 3 given fields
 4. Only exact match filtering for values
 
-## Nice To Haves
+## Nice To Haves/Next Steps
 1. Input data validation
 2. The ability to input a CSV by URL
 3. Testing
-4. Have the script live in a callable global package such that a user could call `parse-csv Documents/example.csv` directly into the command line
+4. Have the script live in a globally callable package such that a user could call `parse-csv Documents/example.csv` directly into the command line
+5. Dev and QA branches
+6. Haven't tested yet but not sure if Windows would be supported
