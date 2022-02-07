@@ -3,13 +3,10 @@ import * as readline from 'readline'
 import { BirthdayColumnsEnum } from './types'
 import { filterByBirthdayColumn } from './filters'
 
-
-
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
 })
-
 
 rl.question(
   'Which .csv file do you want to filter? \n',
