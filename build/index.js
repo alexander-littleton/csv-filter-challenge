@@ -23,13 +23,14 @@ const parsers_1 = require("./parsers");
 const readline = __importStar(require("readline"));
 const types_1 = require("./types");
 const filters_1 = require("./filters");
+const validators_1 = require("./validators");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
 });
 rl.question('Which .csv file do you want to filter? \n', filePath => {
     const extension = filePath.slice(filePath.length - 4);
-    const table = (0, parsers_1.parseCsv)(filePath);
+    const table = (0, parsers_1.parseBirthdayCsv)(filePath);
     let columnSelectionQuestion = `What column do you want to filter by? \n`;
     const birthdayColumns = Object.values(types_1.BirthdayColumnsEnum).filter(value => typeof value === 'string');
     birthdayColumns.forEach((column, i) => {
@@ -37,14 +38,15 @@ rl.question('Which .csv file do you want to filter? \n', filePath => {
     });
     rl.question(columnSelectionQuestion, selectedColumn => {
         const selectedColumnIndex = parseInt(selectedColumn);
+        (0, validators_1.validateBirthdayHeader)(table[0]);
         if (!birthdayColumns[selectedColumnIndex]) {
-            console.log(`Invalid selection: ${selectedColumn}. Expected a number between 0 and ${birthdayColumns.length - 1}`);
+            console.log(`Invalid selection '${selectedColumn}'. Expected a number between 0 and ${birthdayColumns.length - 1}`);
             rl.close();
         }
         rl.question(`What value do you want to filter for? \n`, filterValue => {
             const filteredTable = (0, filters_1.filterByBirthdayColumn)(table, selectedColumnIndex, filterValue);
             if (!filteredTable.length) {
-                console.log(`No values match filter '${filterValue}'`);
+                console.log(`No matches for '${filterValue}'`);
                 rl.close();
             }
             console.log(filteredTable);

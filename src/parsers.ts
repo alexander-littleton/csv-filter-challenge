@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import csv = require('csv-parser')
 import { BirthdayRow } from './types'
 
-export function parseCsv(filepath: string): BirthdayRow[] {
+export function parseBirthdayCsv(filepath: string): BirthdayRow[] {
     const results: BirthdayRow[] = [];
 
     fs.createReadStream(filepath)

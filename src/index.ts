@@ -1,7 +1,8 @@
-import { parseCsv } from './parsers'
+import { parseBirthdayCsv } from './parsers'
 import * as readline from 'readline'
 import { BirthdayColumnsEnum } from './types'
 import { filterByBirthdayColumn } from './filters'
+import { validateBirthdayHeader } from './validators'
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -13,8 +14,7 @@ rl.question(
   filePath => {
     const extension = filePath.slice(filePath.length - 4)
 
-    const table = parseCsv(filePath)
-
+    const table = parseBirthdayCsv(filePath)
     let columnSelectionQuestion = `What column do you want to filter by? \n`
     const birthdayColumns = Object.values(BirthdayColumnsEnum).filter(value => typeof value === 'string')
     birthdayColumns.forEach((column, i)=> {
@@ -24,17 +24,18 @@ rl.question(
       columnSelectionQuestion,
       selectedColumn => {
         const selectedColumnIndex = parseInt(selectedColumn);
+        validateBirthdayHeader(table[0]); // If called earlier, table is an empty array
         
         if (!birthdayColumns[selectedColumnIndex]) {
-          console.log(`Invalid selection: ${selectedColumn}. Expected a number between 0 and ${birthdayColumns.length-1}`)
+          console.log(`Invalid selection '${selectedColumn}'. Expected a number between 0 and ${birthdayColumns.length-1}`)
           rl.close() 
         } 
-        
+
         rl.question(`What value do you want to filter for? \n`, filterValue => {
           const filteredTable = filterByBirthdayColumn(table, selectedColumnIndex, filterValue)
         
           if (!filteredTable.length) {
-            console.log(`No values match filter '${filterValue}'`)
+            console.log(`No matches for '${filterValue}'`)
             rl.close()
           }
 

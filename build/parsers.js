@@ -19,10 +19,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseCsv = void 0;
+exports.parseBirthdayCsv = void 0;
 const fs = __importStar(require("fs"));
 const csv = require("csv-parser");
-function parseCsv(filepath) {
+function parseBirthdayCsv(filepath) {
     const results = [];
     fs.createReadStream(filepath)
         .pipe(csv())
@@ -31,4 +31,4 @@ function parseCsv(filepath) {
     });
     return results;
 }
-exports.parseCsv = parseCsv;
+exports.parseBirthdayCsv = parseBirthdayCsv;
