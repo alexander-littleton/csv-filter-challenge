@@ -17,4 +17,4 @@ By default, the filesystem starts at the root of the project folder for the file
 3. Testing
 4. Have the script live in a globally callable package such that a user could call `parse-csv Documents/example.csv` directly into the command line
 5. Dev and QA branches
-6. Haven't tested yet but not sure if Windows would be supported
+6. Haven't tested yet but not sure if Windows would be supported. Docker image would solve this issue
